@@ -1,0 +1,3 @@
+testcontainers:
+  db:
+    image: "registry.nexus.dev.lo/testcontainers/database-liquibase:dev"

@@ -1,0 +1,4 @@
+rootProject.name = 'note-app'
+
+include 'app',
+        'test-database'

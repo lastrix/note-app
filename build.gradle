@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+ext {
+    version_spring_boot = '3.2.0'
+    version_spring_cloud = "2023.0.0"
+    version_mapstruct_binding = "0.2.0"
+    version_mapstruct = "1.5.3.Final"
+    version_lombok = "1.18.26"
+    version_mockito = '3.8.0'
+    version_testcontainers = "1.19.4"
+    version_jetbrains_annotations = "23.0.0"
+}
+
+allprojects {
+    group 'com.lastrix.example'
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    sourceCompatibility = 17
+    targetCompatibility = 17
+
+    javadoc {
+        options.encoding = 'UTF-8'
+    }
+
+    compileJava {
+        options.encoding = "UTF-8"
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    project.version = System.getProperty("build.version") ?: project.version
+}

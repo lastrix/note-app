@@ -1,0 +1,48 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation platform("org.springframework.boot:spring-boot-dependencies:$version_spring_boot")
+    implementation "org.springframework.boot:spring-boot-autoconfigure"
+    implementation "org.springframework.boot:spring-boot-starter-data-r2dbc"
+
+    implementation "org.jetbrains:annotations:$version_jetbrains_annotations"
+    implementation "org.testcontainers:testcontainers:${version_testcontainers}"
+    implementation "org.testcontainers:r2dbc:${version_testcontainers}"
+    implementation "org.testcontainers:postgresql:${version_testcontainers}"
+    implementation "org.testcontainers:junit-jupiter:${version_testcontainers}"
+    implementation "org.postgresql:r2dbc-postgresql"
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
+
+//    api "io.projectreactor:reactor-core"
+//    api 'jakarta.validation:jakarta.validation-api'
+//    api "io.micrometer:micrometer-registry-prometheus"
+//    api 'javax.xml.bind:jaxb-api:2.3.1'
+//    api 'net.logstash.logback:logstash-logback-encoder:7.4'
+//    api 'org.mapstruct:mapstruct:1.5.5.Final'
+//
+//    api "com.github.ben-manes.caffeine:caffeine"
+
+
+    compileOnly "org.projectlombok:lombok:${version_lombok}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${version_mapstruct_binding}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${version_mapstruct}"
+    annotationProcessor "org.projectlombok:lombok:${version_lombok}"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${version_spring_boot}"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.springframework:spring-test"
+    testImplementation "io.projectreactor:reactor-test"
+    testImplementation "org.mockito:mockito-junit-jupiter:$version_mockito"
+    testImplementation "org.mockito:mockito-inline:$version_mockito"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testImplementation "org.junit.jupiter:junit-jupiter-params"
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    testCompileOnly "org.projectlombok:lombok:${version_lombok}"
+    testAnnotationProcessor "org.projectlombok:lombok-mapstruct-binding:${version_mapstruct_binding}"
+    testAnnotationProcessor "org.mapstruct:mapstruct-processor:${version_mapstruct}"
+    testAnnotationProcessor "org.projectlombok:lombok:${version_lombok}"
+    testAnnotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${version_spring_boot}"
+
+}

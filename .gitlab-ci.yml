@@ -1,0 +1,32 @@
+image: registry.nexus.dev.lo/testcontainers/agent:1
+
+stages:
+  - build
+
+build:
+  variables:
+    GIT_DEPTH: 1
+    GRADLE_OPTS: >
+      -Dorg.gradle.daemon=false
+      -Dorg.gradle.caching=true
+      -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false
+    DB_IMAGE: "registry.nexus.dev.lo/testcontainers/database-liquibase"
+    DB_TAG: "dev"
+    POSTGRES_DB: postgres
+    POSTGRES_USER: user
+    POSTGRES_PASSWORD: password
+    PGPASSWORD: password
+    POSTGRES_SCHEMA: public
+    POSTGRES_PORT: 5432
+    TESTCONTAINERS_DB_ENABLED: "false"
+    SPRING_R2DBC_URL: "r2dbc:postgresql://test-database:${POSTGRES_PORT}/${POSTGRES_DB}?currentSchema=${POSTGRES_SCHEMA}&sslmode=disable&binary_parameters=yes"
+    SPRING_R2DBC_USERNAME: "${POSTGRES_USER}"
+    SPRING_R2DBC_PASSWORD: "${POSTGRES_PASSWORD}"
+  services:
+    - name: "${DB_IMAGE}:${DB_TAG}"
+      alias: test-database
+  stage: build
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(bugfix|hotfix|feature|dev).*$/
+  script:
+    - gradle clean assemble check
